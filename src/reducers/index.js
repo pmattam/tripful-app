@@ -2,8 +2,8 @@ import { addUserToStore } from "../actions/actions";
 import { addUserToStoreReducer } from "./reducers";
 
 const initialState = {
-  user: [],
-  isLoggedIn: false
+  user: []
+  // isLoggedIn: false
 };
 
 let reducers = {
