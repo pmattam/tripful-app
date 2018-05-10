@@ -3,7 +3,6 @@ import { addUserToStoreReducer } from "./reducers";
 
 const initialState = {
   user: []
-  // isLoggedIn: false
 };
 
 let reducers = {
