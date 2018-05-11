@@ -85,10 +85,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  // text: {
-  //     fontSize: 20,
-  //     fontWeight: 'bold'
-  // },
    textfield: {
      height: 40, 
      width: 300,
@@ -96,9 +92,7 @@ const styles = StyleSheet.create({
      borderColor: 'maroon', 
      borderWidth: 1,
      borderRadius: 5,
-     paddingLeft: 10,
-    //  backgroundColor: '#F3FAF5'
-    // backgroundColor: '#fff'
+     paddingLeft: 10
    },
    register: {
       flexDirection: 'row',
@@ -117,7 +111,7 @@ const styles = StyleSheet.create({
        height: 150
    },
    font: {
-      fontSize: 15,
+      fontSize: 15
    }
 });
 
