@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import logo from '../assets/logo.png';
+import { newUserSignUp } from '../lib/api-calls';
 
-let SignUpScreenWrapper = ({props}) => {
+let SignUpScreenWrapper = ({ props }) => {
 
     let userInfo = {};
 
@@ -30,20 +31,21 @@ let SignUpScreenWrapper = ({props}) => {
 
     let handleUserSignUp = () => {
         if(userInfo.username && userInfo.email && userInfo.password && userInfo.location) {
-            registerNewUser(userCredentials)
+            newUserSignUp(userInfo)
             .then(res => res.json())
             .then(result => {
-                if(result.status === "success") {
+                if(result.status === 'success') {
                    console.log(result.status);
+                   props.navigation.navigate('Login');
                 } else {
-                    alert("Failed to Register New User");
+                    alert('Failed to Register New User');
                 }
              })
         } else {
-            console.log("Enter valid Info");
+            console.log('Enter valid Info');
         }
     };
-
+    
     return (
         <View style={styles.container}>
             <Image 
@@ -82,8 +84,8 @@ let SignUpScreenWrapper = ({props}) => {
             />
             <Button
                 style={styles.register}
-                title="Sign Up"
-                color="maroon"
+                title='Sign Up'
+                color='maroon'
                 onPress={() => handleUserSignUp()}
             />
         </View>

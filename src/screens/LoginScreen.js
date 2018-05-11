@@ -43,12 +43,13 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
     />
 
     <TextInput 
-    style={styles.textfield} 
-    placeholder='Email'
-    onChangeText={handleEmailChange}
-    autoCorrect={false}
-    autoCapitalize={'none'}
-    keyboardType='email-address' />
+      style={styles.textfield} 
+      placeholder='Email'
+      onChangeText={handleEmailChange}
+      autoCorrect={false}
+      autoCapitalize={'none'}
+      keyboardType='email-address'
+    />
 
     <TextInput 
     style={styles.textfield} 
@@ -70,7 +71,7 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
     <Button
       style={styles.register}
       title="Sign In"
-      color="#841584"
+      color="maroon"
       onPress={() => handleUserLogin()}
     />
     </View>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   // text: {
   //     fontSize: 20,
@@ -96,17 +97,24 @@ const styles = StyleSheet.create({
      borderWidth: 1,
      borderRadius: 5,
      paddingLeft: 10,
-     backgroundColor: '#F3FAF5'
-
+    //  backgroundColor: '#F3FAF5'
+    // backgroundColor: '#fff'
    },
    register: {
-       flexDirection: 'row',
-       alignItems: 'center',
-       justifyContent: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center'
+   },
+   signin: {
+    height: 40,
+    width: 300,
+    borderColor: 'maroon',
+    borderWidth: 1,
+    borderRadius: 5
    },
    logo: {
        width: 150,
-       height: 150,
+       height: 150
    },
    font: {
       fontSize: 15,
