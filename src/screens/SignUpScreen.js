@@ -4,68 +4,111 @@ import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import logo from '../assets/logo.png';
 
-let SignUpScreenWrapper = ({props}) =>
-<View style={styles.container}>
-        <Image 
-        source={logo}
-        style={styles.logo}
-        />
-        <TextInput 
-            style={styles.field}
-            placeholder='Email Address'/>
+let SignUpScreenWrapper = ({props}) => {
 
-        <TextInput
-            style={styles.field}
-            placeholder='Password'
-        />
+    let userInfo = {};
 
-        <View style={styles.register}>
-            <Text style={styles.font}>Already Registered?</Text>
-            <Button 
-            title="Log In Here"
-            style={styles.button}
-            onPress={() => props.navigation.navigate('Login')}
-        />
+    let handleNameChange = (value) => {
+        console.log(value);
+        userInfo.username = value;
+    };
+
+    let handleEmailChange = (value) => {
+        console.log(value);
+        userInfo.email = value;
+    };
+
+    let handlePasswordChange = (value) => {
+        console.log(value);
+        userInfo.password = value;
+    };
+
+    let handleLocationChange = (value) => {
+        console.log(value);
+        userInfo.location = value;
+    };
+
+    let handleUserSignUp = () => {
+        if(userInfo.username && userInfo.email && userInfo.password && userInfo.location) {
+            console.log(userInfo);
+        } 
+    };
+
+    return (
+        <View style={styles.container}>
+            <Image 
+                source={logo}
+                style={styles.logo}
+            />
+            <TextInput
+                style={styles.textfield}
+                placeholder='Username'
+                onChangeText={handleNameChange}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+            />
+            <TextInput 
+                style={styles.textfield}
+                placeholder='Email'
+                onChangeText={handleEmailChange}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+                keyboardType='email-address'
+            />
+            <TextInput
+                style={styles.textfield}
+                placeholder='Password'
+                onChangeText={handlePasswordChange}
+                secureTextEntry={true}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+            />
+            <TextInput
+                style={styles.textfield}
+                placeholder='Location'
+                onChangeText={handleLocationChange}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+            />
+            <Button
+                style={styles.register}
+                title="Sign Up"
+                color="maroon"
+                onPress={() => handleUserSignUp()}
+            />
         </View>
-
-        <Button
-            style={styles.register}
-          title="Submit"
-          color="#841584"
-          onPress={() => submitUserLoginInformation()}
-        />
-    </View>
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
-      },
-       field: {
-         height: 40, 
-         width: 300,
-         margin: 10,
-         borderColor: 'gray', 
-         borderWidth: 1,
-         borderRadius: 5,
-         paddingLeft: 10,
-         backgroundColor: '#F0FBF0'
-  
-       },
-       register: {
-           flexDirection: 'row',
-           alignItems: 'center',
-           justifyContent: 'center',
-       },
-       logo: {
-           marginBottom: 50,
-       },
-       font: {
-          fontSize: 15,
-       }
-    });
+        justifyContent: 'flex-start'
+    },
+    textfield: {
+        height: 40, 
+        width: 300,
+        margin: 10,
+        borderColor: 'maroon', 
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingLeft: 10
+    },
+    register: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    logo: {
+        width: 150,
+        height: 150
+    },
+    font: {
+        fontSize: 15,
+    }
+});
 
 let mapStateToProps = (state, props) => ({ state, props });
       
