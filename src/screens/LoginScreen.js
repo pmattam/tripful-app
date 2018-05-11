@@ -18,22 +18,13 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
           if(!user.jwt) {
             alert('Authentication Failed, please try again!');
           } else {
-            // tokenToStorage(user.jwt);
             AsyncStorage.setItem('authorization', user.jwt);
             addUserToStore(user);
           }
-        });
+        })
+        .then(() => props.navigation.navigate('App'));
     }
   };
-  
-  let handlesignup = () => {
-    
-    AsyncStorage.getItem('authorization')
-    .then(value => { 
-      alert('coming here');
-      console.log("token", value);
-    });
-  }
   
   let userInfo = {};
   
@@ -70,18 +61,17 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
     <View style={styles.register}>
       <Text style={styles.font}>New Member?</Text>
         <Button 
-            title="Sign Up"
-            style={styles.button}
-            // onPress={() => props.navigation.navigate('SignUp')}
-            onPress={handlesignup}
+          title="Sign Up"
+          style={styles.button}
+          onPress={() => props.navigation.navigate('SignUp')}
         />
     </View>
 
     <Button
-        style={styles.register}
-        title="Sign In"
-        color="#841584"
-        onPress={() => handleUserLogin()}
+      style={styles.register}
+      title="Sign In"
+      color="#841584"
+      onPress={() => handleUserLogin()}
     />
     </View>
   );
@@ -94,10 +84,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  text: {
-      fontSize: 20,
-      fontWeight: 'bold'
-  },
+  // text: {
+  //     fontSize: 20,
+  //     fontWeight: 'bold'
+  // },
    textfield: {
      height: 40, 
      width: 300,
@@ -127,9 +117,8 @@ let mapStateToProps = (state, props) => ({ state, props });
 
 let mapDispatchToProps = dispatch => ({ 
   addUserToStore: (user) => dispatch(addUserToStore(user))
-})
+});
       
-let LoginScreen = connect(mapStateToProps, mapDispatchToProps)(LoginScreenWrapper)
-
+let LoginScreen = connect(mapStateToProps, mapDispatchToProps)(LoginScreenWrapper);
 
 export default LoginScreen;
