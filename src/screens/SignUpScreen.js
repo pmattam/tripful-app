@@ -30,8 +30,18 @@ let SignUpScreenWrapper = ({props}) => {
 
     let handleUserSignUp = () => {
         if(userInfo.username && userInfo.email && userInfo.password && userInfo.location) {
-            console.log(userInfo);
-        } 
+            registerNewUser(userCredentials)
+            .then(res => res.json())
+            .then(result => {
+                if(result.status === "success") {
+                   console.log(result.status);
+                } else {
+                    alert("Failed to Register New User");
+                }
+             })
+        } else {
+            console.log("Enter valid Info");
+        }
     };
 
     return (
