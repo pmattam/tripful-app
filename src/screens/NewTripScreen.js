@@ -1,6 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Text, SafeAreaView, Button, Image } from 'react-native';
+import { 
+  Button,
+  DatePickerIOS, 
+  Image,
+  SafeAreaView, 
+  StyleSheet, 
+  Text,
+  TextInput,
+  View 
+} from 'react-native';
 import { addTripToStore } from '../actions/actions';
 import logo from '../assets/logo.png';
 
@@ -13,6 +22,15 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
   };
   
   let trip = {};
+  trip.plans = {};
+  trip.plans.flightPlans = [];
+  trip.plans.hotelPlans = [];
+  trip.plans.carPlans = [];
+  trip.plans.packingPlans = [];
+  trip.plans.activityPlans = [];
+  trip.plans.snapshots = [];
+  trip.plans.homeCheckPlans = [];
+
   
   let handleTripNameChange = (value) => {
     trip.name = value;
@@ -26,8 +44,10 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
     trip.destination = value;
   };
 
-  let handleStartDateChange = (value) => {
-    trip.startDate = value;
+  let handleStartDateChange = (date) => {
+    trip.startDate = date;
+    console.log("date", date);
+    console.log("trip obj", trip);
   };
 
   let handleEndDateChange = (value) => {
@@ -40,58 +60,69 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
 
   return(
     <SafeAreaView style={styles.container}>
-    <Image source={logo}
-    style={styles.logo}
-    />
+      <Image source={logo}
+      style={styles.logo}
+      />
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='TripName'
-      onChangeText={handleTripNameChange}
-      autoCorrect={false}
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='TripName'
+        onChangeText={handleTripNameChange}
+        autoCorrect={false}
+        autoCapitalize={'none'} />
+
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Source'
+        onChangeText={handleSourceChange}
+        autoCorrect={false}
       autoCapitalize={'none'} />
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='Source'
-      onChangeText={handleSourceChange}
-      autoCorrect={false}
-     autoCapitalize={'none'} />
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Destination'
+        onChangeText={handleDestChange}
+        autoCorrect={false}
+        autoCapitalize={'none'} />
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='Destination'
-      onChangeText={handleDestChange}
-      autoCorrect={false}
-      autoCapitalize={'none'} />
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Description'
+        onChangeText={handleDescChange}
+        autoCorrect={false}
+        autoCapitalize={'none'} 
+      />
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='Start Date'
-      onChangeText={handleStartDateChange}
-      autoCorrect={false}
-      autoCapitalize={'none'} />
+      {/* <View style={styles.datePickerBox}> 
+        <DatePickerIOS
+          date={new Date()}
+          mode='date'
+          placeholder='Start Date'
+          format='MM-DD-YYYY'
+          onDateChange={handleStartDateChange}
+        />
+      </View> */}
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='End Date'
-      onChangeText={handleEndDateChange}
-      autoCorrect={false}
-      autoCapitalize={'none'} />
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Start Date'
+        onChangeText={handleStartDateChange}
+        autoCorrect={false}
+        autoCapitalize={'none'} />}
 
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='Description'
-      onChangeText={handleDescChange}
-      autoCorrect={false}
-      autoCapitalize={'none'} />
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='End Date'
+        onChangeText={handleEndDateChange}
+        autoCorrect={false}
+        autoCapitalize={'none'} />
 
-    <Button
-      style={styles.button}
-      title="Save"
-      color="maroon"
-      onPress={() => handleAddTrip()}
-    />
+      <Button
+        style={styles.button}
+        title="Save"
+        color="maroon"
+        onPress={() => handleAddTrip()}
+      />
     </SafeAreaView>
   );
 }
@@ -123,6 +154,10 @@ const styles = StyleSheet.create({
    },
    font: {
       fontSize: 15
+   },
+   datePickerBox: {
+     width: 300,
+     height: 300
    }
 });
 
