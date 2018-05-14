@@ -9,7 +9,7 @@ let LoadingScreenWrapper = ({ props }) => {
     const userToken = await AsyncStorage.getItem('authorization');
     console.log(userToken);
     console.log("props", props);
-    props.navigation.navigate(userToken ? 'App' : 'App');
+    props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   navigateByToken();

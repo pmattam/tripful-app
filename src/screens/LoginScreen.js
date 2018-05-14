@@ -17,12 +17,14 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
           console.log(user);
           if(!user.jwt) {
             alert('Authentication Failed, please try again!');
+            // props.navigation.navigate('Login');
           } else {
             AsyncStorage.setItem('authorization', user.jwt);
             addUserToStore(user);
+            props.navigation.navigate('App');
           }
-        })
-        .then(() => props.navigation.navigate('App'));
+        });
+        //.then(() => props.navigation.navigate('App'));
     }
   };
   
