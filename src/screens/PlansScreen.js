@@ -5,8 +5,8 @@ import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-let PlansScreenWrapper = ({ state, props }) => {
-  console.log("in plans", state);
+let PlansScreenWrapper = ({ props }) => {
+  // console.log("in plans", state);
   console.log("in plans", props.navigation.state.params);
   trip = props.navigation.state.params.trip;
   if (props.navigation.state.params.hotelPlan) {
@@ -19,6 +19,12 @@ let PlansScreenWrapper = ({ state, props }) => {
       trip.plans.flightPlans.push(props.navigation.state.params.flightPlan);
     }
   };
+  if (props.navigation.state.params.source) {
+    if (trip.plans.snapshots.indexOf(props.navigation.state.params.source) == -1) {
+      trip.plans.snapshots.push(props.navigation.state.params.source);
+    }
+  };
+
   console.log("in plans after", trip);
   let addNewPlan = () => {
     console.log("Adding New Plan");
@@ -68,6 +74,16 @@ let PlansScreenWrapper = ({ state, props }) => {
               </TouchableOpacity>
             </SafeAreaView> 
       )}   
+      {
+        trip.plans.snapshots.map(snapshot => 
+          <SafeAreaView style={styles.plan} key={snapshot.uri}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('PreviewImage', { snapshot })}>
+              <Image source={snapshot}
+                style={styles.snapshot}
+              />
+            </TouchableOpacity>
+          </SafeAreaView>
+      )}
       </SafeAreaView>
       <SafeAreaView style={styles.plus}>
         <TouchableOpacity style={styles.to} onPress={addNewPlan}>
@@ -117,6 +133,10 @@ let PlansScreenWrapper = ({ state, props }) => {
       borderRadius: 5,
       paddingLeft: 0,
     },
+    snapshot: {
+      width: 50,
+      height: 50
+    }
   });
 
   let mapStateToProps = (state, props) => ({ state, props });

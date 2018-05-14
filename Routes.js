@@ -8,6 +8,7 @@ import PlansScreen from './src/screens/PlansScreen';
 import NewPlanScreen from './src/screens/NewPlanScreen';
 import NewHotelScreen from './src/screens/NewHotelScreen';
 import NewFlightScreen from './src/screens/NewFlightScreen';
+import SnapShotPreviewScreen from './src/screens/SnapShotPreviewScreen';
 import MainTabNavigator from './MainTabNavigator';
 
 import MapScreen from './src/screens/MapScreen';
@@ -64,6 +65,12 @@ const AppStack = createStackNavigator({
         screen: NewHotelScreen,
         navigationOptions: {
             title: 'AddHotel'
+        }
+    },
+    PreviewImage: {
+        screen: SnapShotPreviewScreen,
+        navigationOptions: {
+            title: 'PreviewImage'
         }
     },
     Map: {
