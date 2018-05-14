@@ -9,7 +9,7 @@ let LoadingScreenWrapper = ({ props }) => {
     const userToken = await AsyncStorage.getItem('authorization');
     console.log(userToken);
     console.log("props", props);
-    props.navigation.navigate(userToken ? 'Auth' : 'App');
+    props.navigation.navigate(userToken ? 'App' : 'App');
   };
 
   navigateByToken();
@@ -17,7 +17,7 @@ let LoadingScreenWrapper = ({ props }) => {
     return (
       <View style={styles.container}>
       <Image source={logo}
-      style={styles.logo}
+        style={styles.logo}
       />
       <Text style={styles.font}>Welcome to Tripful!</Text>
       </View>

@@ -6,28 +6,32 @@ import ProfileScreen from './src/screens/ProfileScreen';
 
 const MainTabNavigator = createBottomTabNavigator({
     Trips: {
-        screen: TripsScreen
+        screen: TripsScreen,
+        title: 'Trips'
     },
     Profile: {
-        screen: ProfileScreen
+        screen: ProfileScreen,
+        title: 'Profile'
     }
 }, {
     navigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, tintColor }) => {
             const { routeName } = navigation.state;
             if (routeName === 'Trips') {
-            name = `ios-paper-plane${focused ? '' : '-outline'}`;
+                name = `ios-paper-plane${focused ? '' : '-outline'}`;
             } else if (routeName === 'Profile') {
-            name = `ios-person${focused ? '' : '-outline'}`;
+                name = `ios-person${focused ? '' : '-outline'}`;
             }
-            return <Ionicons name={name} size={25} color={tintColor} />;
+            return <Ionicons name = { name }
+            size = { 25 }
+            color = { tintColor }
+            />;
         },
-      }),
-      tabBarOptions: {
+    }),
+    tabBarOptions: {
         activeTintColor: 'maroon',
         inactiveTintColor: 'gray',
-      },
-    }
-  );
+    },
+});
 
 export default MainTabNavigator;
