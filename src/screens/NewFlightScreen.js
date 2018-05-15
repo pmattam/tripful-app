@@ -7,8 +7,8 @@ let NewFlightScreenWrapper = ({ props }) => {
 
   let handleAddFlight = () => {
     console.log(flightPlan);
-    trip = props.navigation.state.params.trip;
-    console.log(trip);
+    // trip = props.navigation.state.params.trip;
+    // console.log(trip);
     props.navigation.navigate('Plans', {flightPlan})
   };
   
@@ -52,12 +52,20 @@ let NewFlightScreenWrapper = ({ props }) => {
     style={styles.logo}
     />
 
+
+    <TextInput 
+      style={styles.textfield} 
+      placeholder='Airline'
+      onChangeText={handleAirlineChange}
+      autoCorrect={false}
+      autoCapitalize={'none'} />
+      
     <TextInput 
       style={styles.textfield} 
       placeholder='Confirmation Number'
       onChangeText={handleConfChange}
       autoCorrect={false}
-     autoCapitalize={'none'} />
+     autoCapitalize={'characters'} />
 
     <TextInput 
       style={styles.textfield} 
@@ -70,13 +78,6 @@ let NewFlightScreenWrapper = ({ props }) => {
       style={styles.textfield} 
       placeholder='Departure Date'
       onChangeText={handleDeptDateChange}
-      autoCorrect={false}
-      autoCapitalize={'none'} />
-
-    <TextInput 
-      style={styles.textfield} 
-      placeholder='Airline'
-      onChangeText={handleAirlineChange}
       autoCorrect={false}
       autoCapitalize={'none'} />
 
@@ -141,7 +142,9 @@ const styles = StyleSheet.create({
    },
    logo: {
        width: 150,
-       height: 150
+       height: 150,
+       borderRadius: 100,
+
    },
    font: {
       fontSize: 15

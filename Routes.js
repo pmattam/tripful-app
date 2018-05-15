@@ -1,3 +1,4 @@
+console.disableYellowBox = true;
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import LoadingScreen from './src/screens/LoadingScreen';
@@ -8,7 +9,11 @@ import PlansScreen from './src/screens/PlansScreen';
 import NewPlanScreen from './src/screens/NewPlanScreen';
 import NewHotelScreen from './src/screens/NewHotelScreen';
 import NewFlightScreen from './src/screens/NewFlightScreen';
+import NewCarRentalScreen from './src/screens/NewCarRentalScreen';
+import NewPackingListScreen from './src/screens/NewPackingListScreen';
+import NewHomeCheckListScreen from './src/screens/NewHomeCheckListScreen';
 import SnapShotPreviewScreen from './src/screens/SnapShotPreviewScreen';
+import FlightScreen from './src/screens/FlightScreen';
 import MainTabNavigator from './MainTabNavigator';
 
 import MapScreen from './src/screens/MapScreen';
@@ -67,6 +72,24 @@ const AppStack = createStackNavigator({
             title: 'AddHotel'
         }
     },
+    AddCar: {
+        screen: NewCarRentalScreen,
+        navigationOptions: {
+            title: 'AddCar'
+        }
+    },
+    AddPackingList: {
+        screen: NewPackingListScreen,
+        navigationOptions: {
+            title: 'AddPackingList'
+        }
+    },
+    AddHomeChecklist: {
+        screen: NewHomeCheckListScreen,
+        navigationOptions: {
+            title: 'AddHomeChecklist'
+        }
+    },
     PreviewImage: {
         screen: SnapShotPreviewScreen,
         navigationOptions: {
@@ -77,6 +100,12 @@ const AppStack = createStackNavigator({
         screen: MapScreen,
         navigationOptions: {
             title: 'Map'
+        }
+    },
+    Flight: {
+        screen: FlightScreen,
+        navigationOptions: {
+            title: 'Flight'
         }
     },
 }, {

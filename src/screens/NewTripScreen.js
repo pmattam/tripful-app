@@ -18,7 +18,7 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
   let handleAddTrip = () => {
     console.log(trip);
     addTripToStore(trip);
-    props.navigation.navigate('Trips')
+    props.navigation.navigate('Trips');
   };
   
   let trip = {};
@@ -30,7 +30,6 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
   trip.plans.activityPlans = [];
   trip.plans.snapshots = [];
   trip.plans.homeCheckPlans = [];
-
   
   let handleTripNameChange = (value) => {
     trip.name = value;
@@ -44,14 +43,16 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
     trip.destination = value;
   };
 
-  let handleStartDateChange = (date) => {
-    trip.startDate = date;
-    console.log("date", date);
-    console.log("trip obj", trip);
+  let handleStartDateChange = (dateValue) => {
+    trip.startDate = dateValue;
+    console.log('start date', dateValue);
+    console.log('trip obj', trip);
   };
 
-  let handleEndDateChange = (value) => {
-    trip.endDate = value;
+  let handleEndDateChange = (dateValue) => {
+    // trip.endDate = value;
+    console.log('end date', dateValue);
+    trip.endDate = dateValue;
   };
 
   let handleDescChange = (value) => {
@@ -69,29 +70,21 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
         placeholder='TripName'
         onChangeText={handleTripNameChange}
         autoCorrect={false}
-        autoCapitalize={'none'} />
+        autoCapitalize={'characters'} />
 
       <TextInput 
         style={styles.textfield} 
         placeholder='Source'
         onChangeText={handleSourceChange}
         autoCorrect={false}
-      autoCapitalize={'none'} />
+        autoCapitalize={'words'} />
 
       <TextInput 
         style={styles.textfield} 
         placeholder='Destination'
         onChangeText={handleDestChange}
         autoCorrect={false}
-        autoCapitalize={'none'} />
-
-      <TextInput 
-        style={styles.textfield} 
-        placeholder='Description'
-        onChangeText={handleDescChange}
-        autoCorrect={false}
-        autoCapitalize={'none'} 
-      />
+        autoCapitalize={'words'} />
 
       {/* <View style={styles.datePickerBox}> 
         <DatePickerIOS
@@ -108,14 +101,24 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
         placeholder='Start Date'
         onChangeText={handleStartDateChange}
         autoCorrect={false}
-        autoCapitalize={'none'} />}
+        autoCapitalize={'none'} 
+      />
 
       <TextInput 
         style={styles.textfield} 
         placeholder='End Date'
         onChangeText={handleEndDateChange}
         autoCorrect={false}
-        autoCapitalize={'none'} />
+        autoCapitalize={'none'} 
+      />
+
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Description'
+        onChangeText={handleDescChange}
+        autoCorrect={false}
+        autoCapitalize={'words'} 
+      />
 
       <Button
         style={styles.button}
@@ -150,7 +153,8 @@ const styles = StyleSheet.create({
    },
    logo: {
        width: 150,
-       height: 150
+       height: 150,
+       borderRadius: 100,
    },
    font: {
       fontSize: 15

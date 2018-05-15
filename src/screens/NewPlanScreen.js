@@ -34,17 +34,17 @@ let NewPlanScreenWrapper = ({ props }) => {
     style={styles.logo}
     />
     
-    <TouchableOpacity style={styles.to}>
-      <Text>Packing Items</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight', { trip })}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight')}>
       <Text>Flight</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar', { trip })}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel')}>
+      <Text>Hotel</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar')}>
       <Text>Car Rental</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel', { trip })}>
-      <Text>Hotel</Text>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList')}>
+      <Text>Packing Items</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.to}>
       <Text>Activity</Text>
@@ -52,7 +52,7 @@ let NewPlanScreenWrapper = ({ props }) => {
     <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
       <Text>Snapshot</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist')}>
       <Text>Home Checklist</Text>
     </TouchableOpacity>
 
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
    logo: {
        width: 150,
        height: 150,
+       borderRadius: 100,
    },
    font: {
       fontSize: 20,
@@ -94,8 +95,7 @@ const styles = StyleSheet.create({
 });
 
 let mapStateToProps = (state, props) => ({ state, props });
-
-      
+ 
 let NewPlanScreen = connect(mapStateToProps)(NewPlanScreenWrapper);
 
 export default NewPlanScreen;
