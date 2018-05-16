@@ -1,15 +1,17 @@
-import { addUserToStore, addTripToStore, updateTripToStore } from "../actions/actions";
-import { addUserToStoreReducer, addTripToStoreReducer, updateTripToStoreReducer } from "./reducers";
+import { addUserToStore, addTripToStore, updateTripToStore, loadTripsToStore, clearStore } from "../actions/actions";
+import { addUserToStoreReducer, addTripToStoreReducer, updateTripToStoreReducer, loadTripsToStoreReducer, clearStoreReducer } from "./reducers";
 
 const initialState = {
-    user: [],
+    user: {},
     trips: []
 };
 
 let reducers = {
     [addUserToStore]: addUserToStoreReducer,
     [addTripToStore]: addTripToStoreReducer,
-    [updateTripToStore]: updateTripToStoreReducer
+    [updateTripToStore]: updateTripToStoreReducer,
+    [loadTripsToStore]: loadTripsToStoreReducer,
+    [clearStore]: clearStoreReducer
 };
 
 let fallbackReducer = state => state;

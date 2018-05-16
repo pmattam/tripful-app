@@ -5,7 +5,7 @@ import ImagePicker from 'react-native-image-picker';
 import logo from '../assets/logo.png';
 
 let NewPlanScreenWrapper = ({ props }) => {
-  trip = props.navigation.state.params.trip;
+  // trip = props.navigation.state.params.trip;
   plan = {};
 
   let handleSnapShot = () => {

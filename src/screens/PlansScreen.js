@@ -54,8 +54,8 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
     //props.navigation.navigate('Map')
   };
   let saveTrip = () => {
-    trip.userid = (state.user.length > 0) ? state.user[0].id : 1;
-    addTrip(trip)
+    // trip.userid = (state.user) ? state.user.id : 1;
+    addTrip(trip, state.user.jwt)
       .then(res => res.json())
       .then(response => {
           console.log("stored in server");

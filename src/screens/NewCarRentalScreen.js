@@ -35,8 +35,7 @@ let NewCarRentalScreenWrapper = ({ props }) => {
   let handleDescChange = (value) => {
     carRental.description = value;
   };
-
-
+  
   return(
     <SafeAreaView style={styles.container}>
     <Image source={logo}

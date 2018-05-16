@@ -1,27 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import trip1 from '../assets/trip1.jpg';
+import { getAllTrips } from '../lib/api-calls';
+import { loadTripsToStore } from '../actions/actions';
+
+
 // import { green } from 'ansi-colors';
 
-let TripsScreenWrapper = ({ state, props }) => {
-  console.log("trips", state.trips)
+class TripsScreenWrapper extends Component {
 
-  let addNewTrip = () => {
-    console.log("Adding New Trip");
-    props.navigation.navigate('AddTrip')
-  };
-  return(
-    <SafeAreaView style={styles.container}>
+//let TripsScreenWrapper = ({ state, props }) => {
+  // console.log("trips", state.trips)
+  // constructor(props) {
+  //   super(props);
+  //   console.log("props in con", props)
+  // }
+
+  
+  componentDidMount = () => {
+    console.log("User in state", this.props.user);
+    getAllTrips(this.props.user.jwt) 
+      .then(res => res.json())
+      .then(trips => {
+        console.log(trips);
+          this.props.loadTripsToStore(trips);
+      });
+  }
+
+  render() {
+    let trips = this.props.trips;
+
+    // console.log("trips inside", trips);
+
+    let addNewTrip = () => {
+      console.log("Adding New Trip");
+      this.props.navigation.navigate('AddTrip')
+    };
+    return(
+      <SafeAreaView style={styles.container}>
         <Image source={logo}
           style={styles.logo}
         />
       {
-        state.trips.map(trip => 
+        trips.map(trip => 
             <SafeAreaView style={styles.trip} key={trip.name}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('Plans', { trip })}> 
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Plans', { trip })}> 
                 <ImageBackground source={trip1}
                   style={styles.snapshot}>
                   <Text style={styles.textBold}>
@@ -31,10 +57,10 @@ let TripsScreenWrapper = ({ state, props }) => {
                     {trip.destination}
                   </Text>
                   <Text style={styles.text}>
-                    {trip.startDate}
+                    {trip.startdate.substring(0, 10)}
                   </Text>
                   <Text style={styles.text}>
-                    {trip.endDate}
+                    {trip.enddate.substring(0, 10)}
                   </Text>
                 </ImageBackground>
               </TouchableOpacity>
@@ -50,6 +76,7 @@ let TripsScreenWrapper = ({ state, props }) => {
       
     </SafeAreaView>
   )}
+}
 
   const styles = StyleSheet.create({
     container: {
@@ -102,9 +129,12 @@ let TripsScreenWrapper = ({ state, props }) => {
     }
   });
 
-  let mapStateToProps = (state, props) => ({ state, props });
+  let mapStateToProps = (state) => ({ user: state.user, trips: state.trips });
 
+  let mapDispatchToProps = dispatch => ({ 
+    loadTripsToStore: (trips) => dispatch(loadTripsToStore(trips))
+  });
       
-  let TripsScreen = connect(mapStateToProps)(TripsScreenWrapper);
+  let TripsScreen = connect(mapStateToProps, mapDispatchToProps)(TripsScreenWrapper);
 
 export default TripsScreen;
