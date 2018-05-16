@@ -27,7 +27,7 @@ export default class MapScreen extends React.Component {
         super(props);
         console.log("maps props", props);
         this.state = {
-          hotel: props.navigation.state.params.hotelPlan,
+          plan: props.navigation.state.params.plan,
           region: {
             latitude: LATITUDE,
             longitude: LONGITUDE,
@@ -43,7 +43,7 @@ export default class MapScreen extends React.Component {
     }
 
     getMarker = () => {
-      address = this.state.hotel.address; //"1.5 km northwest from Arenal Dam, La Fortuna, Costa Rica";
+      address = this.state.plan.address; //"1.5 km northwest from Arenal Dam, La Fortuna, Costa Rica";
       console.log("address", address);
       var geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDhUOOJ3zqFcsqCSl9pyYMXXiyMw03wH4E`;
         fetch(geoURL, {method: 'GET'})
@@ -86,7 +86,7 @@ export default class MapScreen extends React.Component {
                   <Marker
                       key={marker.id}
                       coordinate={marker.coordinates}
-                      title={this.state.hotel.name}
+                      title={this.state.plan.name}
                       description={marker.description}
                       pinColor={'lightmaroon'}
                       onPress={e => console.log(e.description)}

@@ -1,35 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, TextInput, Text, SafeAreaView, Button, Image, TouchableOpacity } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import logo from '../assets/logo.png';
 
 let NewPlanScreenWrapper = ({ props }) => {
   trip = props.navigation.state.params.trip;
+
+  let handleSnapShot = () => {
+    ImagePicker.showImagePicker({title: 'Select an Image'}, (response) => {
+      console.log('Response = ', response);
+      
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+        console.log('src', source);
+        props.navigation.navigate('Plans', { source })
+      }
+    });
+  }
+
   return(
     <SafeAreaView style={styles.container}>
     <Image source={logo}
     style={styles.logo}
     />
     
-    <TouchableOpacity style={styles.to}>
-      <Text>Packing Items</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight', { trip })}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight')}>
       <Text>Flight</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel')}>
+      <Text>Hotel</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar')}>
       <Text>Car Rental</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel', { trip })}>
-      <Text>Hotel</Text>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList')}>
+      <Text>Packing Items</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.to}>
       <Text>Activity</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to}>
+    <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
       <Text>Snapshot</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist')}>
       <Text>Home Checklist</Text>
     </TouchableOpacity>
 
@@ -61,6 +84,7 @@ const styles = StyleSheet.create({
    logo: {
        width: 150,
        height: 150,
+       borderRadius: 100,
    },
    font: {
       fontSize: 20,
@@ -71,8 +95,7 @@ const styles = StyleSheet.create({
 });
 
 let mapStateToProps = (state, props) => ({ state, props });
-
-      
+ 
 let NewPlanScreen = connect(mapStateToProps)(NewPlanScreenWrapper);
 
 export default NewPlanScreen;

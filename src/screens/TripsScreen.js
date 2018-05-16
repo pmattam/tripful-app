@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, StyleSheet, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import trip1 from '../assets/trip1.jpg';
+// import { green } from 'ansi-colors';
 
 let TripsScreenWrapper = ({ state, props }) => {
   console.log("trips", state.trips)
@@ -20,19 +21,22 @@ let TripsScreenWrapper = ({ state, props }) => {
       {
         state.trips.map(trip => 
             <SafeAreaView style={styles.trip} key={trip.name}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('Plans', { trip })}>
-                <Text style={styles.textBold}>
-                {trip.name}
-                </Text>
-                <Text style={styles.text}>
-                {trip.destination}
-                </Text>
-                <Text style={styles.text}>
-                {trip.startDate}
-                </Text>
-                <Text style={styles.text}>
-                {trip.endDate}
-                </Text>
+              <TouchableOpacity onPress={() => props.navigation.navigate('Plans', { trip })}> 
+                <ImageBackground source={trip1}
+                  style={styles.snapshot}>
+                  <Text style={styles.textBold}>
+                    {trip.name}
+                  </Text>
+                  <Text style={styles.text}>
+                    {trip.destination}
+                  </Text>
+                  <Text style={styles.text}>
+                    {trip.startDate}
+                  </Text>
+                  <Text style={styles.text}>
+                    {trip.endDate}
+                  </Text>
+                </ImageBackground>
               </TouchableOpacity>
             </SafeAreaView>             
         )
@@ -58,32 +62,43 @@ let TripsScreenWrapper = ({ state, props }) => {
       flex: 0.3,
       flexDirection: 'row',
       backgroundColor: '#fff',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       justifyContent: 'center',
-      height: 50, 
+      height: 100, 
       width: 400,
-      margin: 0,
+      // margin: 10,
       borderColor: 'maroon', 
-      borderWidth: 1,
-      borderRadius: 5,
-      paddingLeft: 0,
+      // borderWidth: 1,
+      // borderRadius: 5,
     },
     logo: {
       width: 150,
-      height: 150
+      height: 150,
+      borderRadius: 100,
     },
     textBold: {
       fontSize: 20,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: 'white',
     },
     text: {
-      fontSize: 20
+      fontSize: 20,
+      color: 'white',
     },
     plus: {
       flex: 1,
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'flex-end',
+    },
+    snapshot: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 500,
+      height: 100,
+      paddingRight: 5,
+      borderColor: 'maroon', 
     }
   });
 

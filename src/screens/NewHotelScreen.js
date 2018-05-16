@@ -7,8 +7,6 @@ let NewHotelScreenWrapper = ({ props }) => {
 
   let handleAddHotel = () => {
     console.log(hotelPlan);
-    trip = props.navigation.state.params.trip;
-    console.log(trip);
     props.navigation.navigate('Plans', {hotelPlan})
   };
   
@@ -57,21 +55,21 @@ let NewHotelScreenWrapper = ({ props }) => {
       placeholder='Hotel Name'
       onChangeText={handleHotelNameChange}
       autoCorrect={false}
-      autoCapitalize={'none'} />
+      autoCapitalize={'words'} />
 
     <TextInput 
       style={styles.textfield} 
       placeholder='Confirmation Number'
       onChangeText={handleConfChange}
       autoCorrect={false}
-     autoCapitalize={'none'} />
+     autoCapitalize={'characters'} />
 
     <TextInput 
       style={styles.textfield} 
       placeholder='Address'
       onChangeText={handleAddressChange}
       autoCorrect={false}
-      autoCapitalize={'none'} />
+      autoCapitalize={'words'} />
 
     <TextInput 
       style={styles.textfield} 
@@ -141,7 +139,8 @@ const styles = StyleSheet.create({
    },
    logo: {
        width: 150,
-       height: 150
+       height: 150,
+       borderRadius: 100,
    },
    font: {
       fontSize: 15
