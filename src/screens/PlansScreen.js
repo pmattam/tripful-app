@@ -8,9 +8,12 @@ import flight from '../assets/flight.jpg';
 import hotel from '../assets/hotel.jpg';
 import car from '../assets/car.jpg';
 import home from '../assets/home.jpg';
+import { addTrip } from '../lib/api-calls';
+import { updateTripToStore } from '../actions/actions';
 
-let PlansScreenWrapper = ({ props }) => {
-  // console.log("in plans", state);
+
+let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
+  console.log("in plans", state);
   console.log("in plans", props.navigation.state.params);
   trip = props.navigation.state.params.trip;
   if (props.navigation.state.params.hotelPlan) {
@@ -51,6 +54,15 @@ let PlansScreenWrapper = ({ props }) => {
     //props.navigation.navigate('Map')
   };
   let saveTrip = () => {
+    trip.userid = (state.user.length > 0) ? state.user[0].id : 1;
+    addTrip(trip)
+      .then(res => res.json())
+      .then(response => {
+          console.log("stored in server");
+          updateTripToStore(trip);
+      }).then(() => {
+        props.navigation.navigate('Trips');
+      });
   }
   return(
     <SafeAreaView style={styles.container}>
@@ -243,7 +255,10 @@ let PlansScreenWrapper = ({ props }) => {
 
   let mapStateToProps = (state, props) => ({ state, props });
 
+  let mapDispatchToProps = dispatch => ({ 
+    updateTripToStore: (trip) => dispatch(updateTripToStore(trip))
+  });
       
-  let PlansScreen = connect(mapStateToProps)(PlansScreenWrapper);
+  let PlansScreen = connect(mapStateToProps, mapDispatchToProps)(PlansScreenWrapper);
 
 export default PlansScreen;

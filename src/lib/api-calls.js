@@ -19,3 +19,23 @@ export let newUserSignUp = (userInfo) =>
             "Content-Type": "application/json"
         })
     })
+
+export let addTrip = (trip) =>
+    fetch("http://localhost:3000/trips", {
+        //fetch("https://tripful.herokuapp.com/trips", {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(trip),
+        headers: new Headers({
+            "Content-Type": "application/json"
+        })
+    })
+
+export let getAllTrips = () =>
+    fetch("http://localhost:3000/trips", {
+        method: "GET",
+        mode: "cors",
+        headers: new Headers({
+            "Authorization": `Bearer ${localStorage.getItem("authorization")}`
+        })
+    })
