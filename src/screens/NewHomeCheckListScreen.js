@@ -8,34 +8,23 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
   
   console.log('props inside newhome checklist screen', props);
 
-  let homeCheckList = {};
+  let homeCheckList = props.navigation.state.params.plan;
   // let handleNameChange = (value) => {
   //   pList.name = value;
   // };
-  let checkTurnOffGasItem = (value) => {
-    console.log('check turn off gas item', value);
-    homeCheckList.gasChecked = value;
+  let checkTurnOffGasItem = () => {
+    homeCheckList.gasChecked = !homeCheckList.gasChecked;
   };
   let checkTurnOffRefrigeratorItem = (value) => {
-    homeCheckList.refrigeratorChecked = value;
+    homeCheckList.refrigeratorChecked = !homeCheckList.refrigeratorChecked;
   };
-  let checkSecurityItem = (value) => {
-    homeCheckList.homeSecurityChecked = value;
+  let checkSecurityItem = () => {
+    homeCheckList.homeSecurityChecked = !homeCheckList.homeSecurityChecked;
   };
-  let checkLockedDoorsItem = (value) => {
-    homeCheckList.lockedDoorsChecked = value;
+  let checkLockedDoorsItem = () => {
+    homeCheckList.lockedDoorsChecked = !homeCheckList.lockedDoorsChecked;
   };
-  // let checkShoesItem = (value) => {
-  //   homeCheckList.shoesChecked = value;
-  // };
-  // let checkMedsItem = (value) => {
-  //   homeCheckList.medsChecked = value;
-  // };
-  // let checkCameraItem = (value) => {
-  //   homeCheckList.cameraChecked = value;
-  // };
   let handleAddItems = () => {
-    // console.log(packingList);
     console.log(homeCheckList);
     props.navigation.navigate('Plans', { homeCheckList });
   };

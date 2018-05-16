@@ -6,7 +6,8 @@ import { Button } from 'react-native-elements';
 
 let ProfileScreenWrapper = ({ state, props }) => {
     // console.log('state user email', state.user[0].email);
-    let userEmail = state.user[0].email;
+    //let userEmail = state.user[0].email;
+    let userEmail = "";
     console.log('user email', userEmail);
 
     let handleSignOut = () => {

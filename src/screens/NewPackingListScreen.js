@@ -6,31 +6,33 @@ import logo from '../assets/logo.png';
 // import packing from '../assets/packing.jpg';
 
 let NewPackingListScreenWrapper = ({ props }) => {
-  let packingList = {};
+  let packingList = props.navigation.state.params.plan;
+  // if (props.navigation.state.params.plan) {
+  //   packingList = props.navigation.state.params.plan;
+  // };
   let handleNameChange = (value) => {
     packingList.name = value;
   };
-  let checkShirtsItem = (value) => {
-    console.log('check shirts item', value);
-    packingList.shirtsChecked = value;
+  let checkShirtsItem = () => {
+    packingList.shirtsChecked = !packingList.shirtsChecked;
   };
-  let checkPantsItem = (value) => {
-    packingList.pantsChecked = value;
+  let checkPantsItem = () => {
+    packingList.pantsChecked = !packingList.pantsChecked;
   };
-  let checkTltItem = (value) => {
-    packingList.tltChecked = value;
+  let checkTltItem = () => {
+    packingList.tltChecked = !packingList.tltChecked;
   };
-  let checkCosmeticsItem = (value) => {
-    packingList.cosmeticsChecked = value;
+  let checkCosmeticsItem = () => {
+    packingList.cosmeticsChecked = !packingList.cosmeticsChecked;
   };
-  let checkShoesItem = (value) => {
-    packingList.shoesChecked = value;
+  let checkShoesItem = () => {
+    packingList.shoesChecked = !packingList.shoesChecked;
   };
-  let checkMedsItem = (value) => {
-    packingList.medsChecked = value;
+  let checkMedsItem = () => {
+    packingList.medsChecked = !packingList.medsChecked;
   };
-  let checkCameraItem = (value) => {
-    packingList.cameraChecked = value;
+  let checkCameraItem = () => {
+    packingList.cameraChecked = !packingList.cameraChecked;
   };
   let handleAddItems = () => {
     console.log(packingList);
@@ -50,6 +52,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <TextInput 
           // style={styles.textfield} 
           placeholder='Packing Name'
+          value={packingList.name}
           onChangeText={handleNameChange}
           autoCorrect={false}
           autoCapitalize={'words'} />
