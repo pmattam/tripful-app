@@ -1,7 +1,6 @@
 import React from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Marker } from 'react-native-maps';
-
 import {
   Platform,
   StyleSheet,
@@ -43,17 +42,16 @@ export default class MapScreen extends React.Component {
     }
 
     getMarker = () => {
-      address = this.state.plan.address; //"1.5 km northwest from Arenal Dam, La Fortuna, Costa Rica";
+      address = this.state.plan.address;
       console.log("address", address);
       var geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDhUOOJ3zqFcsqCSl9pyYMXXiyMw03wH4E`;
         fetch(geoURL, {method: 'GET'})
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(apiObjData) {
+          .then(response  => { return response.json() })
+          .then(apiObjData => {
             console.log(apiObjData.results[0]);
             return apiObjData.results[0];
-          }).then(function(geoData) {
+          })
+          .then(geoData => {
             return marker = {
               coordinates: {
                 latitude: geoData.geometry.location.lat,
@@ -61,13 +59,18 @@ export default class MapScreen extends React.Component {
               },
               id: 1
             };
-          }).then((marker) => {
+          })
+          .then(marker => {
             console.log(marker);
             this.setState(() => ({markers: [marker]}))
-          })
-    }
+          });
+    };
 
     render() {
+      let name = this.state.plan.name;
+      let address = this.state.plan.address;
+      let combo = name + ': ' + address;
+
       const {region} = this.state.region
       return(
           <View style={styles.container}>
@@ -80,15 +83,13 @@ export default class MapScreen extends React.Component {
               showsMyLocationButton={true}
               followsUserLocation={false}
               >
-          
               {this.state.markers.map((marker, id) => (
                   <Marker
                       key={marker.id}
                       coordinate={marker.coordinates}
-                      title={this.state.plan.name}
+                      title={combo}
                       description={marker.description}
                       pinColor={'lightmaroon'}
-                      onPress={e => console.log(e.description)}
                   />
               ))}
               </MapView>
