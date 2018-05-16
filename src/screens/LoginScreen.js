@@ -17,14 +17,12 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
           console.log(user);
           if(!user.jwt) {
             alert('Authentication Failed, please try again!');
-            // props.navigation.navigate('Login');
           } else {
             AsyncStorage.setItem('authorization', user.jwt);
             addUserToStore(user);
             props.navigation.navigate('App');
           }
         });
-        //.then(() => props.navigation.navigate('App'));
     }
   };
   
@@ -110,7 +108,8 @@ const styles = StyleSheet.create({
    },
    logo: {
        width: 150,
-       height: 150
+       height: 150,
+       borderRadius: 100,
    },
    font: {
       fontSize: 15

@@ -70,7 +70,6 @@ export default class MapScreen extends React.Component {
     render() {
       const {region} = this.state.region
       return(
-      <React.Fragment>
           <View style={styles.container}>
               <MapView
               style={styles.map}
@@ -94,7 +93,6 @@ export default class MapScreen extends React.Component {
               ))}
               </MapView>
           </View>
-      </React.Fragment>
       );
   }
 }

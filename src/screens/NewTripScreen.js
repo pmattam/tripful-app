@@ -44,7 +44,7 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
   };
 
   let handleStartDateChange = (dateValue) => {
-    trip.startDate = dateValue;
+    trip.startdate = dateValue;
     console.log('start date', dateValue);
     console.log('trip obj', trip);
   };
@@ -52,7 +52,7 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
   let handleEndDateChange = (dateValue) => {
     // trip.endDate = value;
     console.log('end date', dateValue);
-    trip.endDate = dateValue;
+    trip.enddate = dateValue;
   };
 
   let handleDescChange = (value) => {

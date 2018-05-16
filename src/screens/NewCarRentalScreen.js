@@ -35,8 +35,7 @@ let NewCarRentalScreenWrapper = ({ props }) => {
   let handleDescChange = (value) => {
     carRental.description = value;
   };
-
-
+  
   return(
     <SafeAreaView style={styles.container}>
     <Image source={logo}
@@ -118,7 +117,8 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 150,
-        height: 150
+        height: 150,
+        borderRadius: 100,
     },
     font: {
         fontSize: 15

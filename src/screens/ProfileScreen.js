@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, StyleSheet, Text, SafeAreaView, Image, View } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, SafeAreaView, Image, View, Button } from 'react-native';
 import logo from '../assets/logo.png';
-import { Button } from 'react-native-elements';
+// import { Button } from 'react-native-elements';
+import { clearStore } from '../actions/actions';
+ 
+let ProfileScreenWrapper = ({ user, props, clearStore }) => {
 
-let ProfileScreenWrapper = ({ state, props }) => {
-    // console.log('state user email', state.user[0].email);
-    let userEmail = state.user[0].email;
-    console.log('user email', userEmail);
+    console.log("user", user);
 
     let handleSignOut = () => {
         AsyncStorage.removeItem('authorization')
+            .then(() => clearStore())
             .then(() => props.navigation.navigate('Login'));  
     };
-
+    
     return ( 
         <SafeAreaView style={styles.container}>
             <Image source={logo}
@@ -21,7 +22,7 @@ let ProfileScreenWrapper = ({ state, props }) => {
             />
             <Text>
                 {
-                    userEmail
+                    user.email
                 }
             </Text>
             <Button
@@ -30,7 +31,6 @@ let ProfileScreenWrapper = ({ state, props }) => {
               color='maroon'
               onPress={handleSignOut}
             />
-            
         </SafeAreaView >
     );
 };
@@ -42,15 +42,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start'
     },
-    //  textfield: {
-    //    height: 40, 
-    //    width: 300,
-    //    margin: 10,
-    //    borderColor: 'maroon', 
-    //    borderWidth: 1,
-    //    borderRadius: 5,
-    //    paddingLeft: 10
-    //  },
      button: {
          flexDirection: 'row',
          alignItems: 'center',
@@ -59,7 +50,7 @@ const styles = StyleSheet.create({
      logo: {
          width: 150,
          height: 150,
-         borderRadius: 100,
+         borderRadius: 100
      },
      font: {
         fontSize: 15
@@ -67,8 +58,10 @@ const styles = StyleSheet.create({
   });
   
 
-let mapStateToProps = (state, props) => ({ state, props });
+let mapStateToProps = (state, props) => ({ user: state.user, props });
 
-let ProfileScreen = connect(mapStateToProps)(ProfileScreenWrapper);
+let mapDispatchToProps = dispatch => ({ clearStore: () => dispatch(clearStore()) });
+
+let ProfileScreen = connect(mapStateToProps, mapDispatchToProps)(ProfileScreenWrapper);
 
 export default ProfileScreen;

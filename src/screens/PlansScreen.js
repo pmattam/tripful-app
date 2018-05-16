@@ -7,9 +7,13 @@ import packing from '../assets/packing.jpg';
 import flight from '../assets/flight.jpg';
 import hotel from '../assets/hotel.jpg';
 import car from '../assets/car.jpg';
+import home from '../assets/home.jpg';
+import { addTrip } from '../lib/api-calls';
+import { updateTripToStore } from '../actions/actions';
 
-let PlansScreenWrapper = ({ props }) => {
-  // console.log("in plans", state);
+
+let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
+  console.log("in plans", state);
   console.log("in plans", props.navigation.state.params);
   trip = props.navigation.state.params.trip;
   if (props.navigation.state.params.hotelPlan) {
@@ -38,8 +42,8 @@ let PlansScreenWrapper = ({ props }) => {
     }
   };
   if (props.navigation.state.params.homeCheckList) {
-   if (trip.plans.homeCheckList.indexOf(props.navigation.state.params.homeCheckList) == -1) {
-    trip.plans.homeCheckList.push(props.navigation.state.params.homeCheckList); 
+   if (trip.plans.homeCheckPlans.indexOf(props.navigation.state.params.homeCheckList) == -1) {
+    trip.plans.homeCheckPlans.push(props.navigation.state.params.homeCheckList); 
    } 
   };
 
@@ -49,6 +53,17 @@ let PlansScreenWrapper = ({ props }) => {
     props.navigation.navigate('AddPlan', { trip })
     //props.navigation.navigate('Map')
   };
+  let saveTrip = () => {
+    // trip.userid = (state.user) ? state.user.id : 1;
+    addTrip(trip, state.user.jwt)
+      .then(res => res.json())
+      .then(response => {
+          console.log("stored in server");
+          updateTripToStore(trip);
+      }).then(() => {
+        props.navigation.navigate('Trips');
+      });
+  }
   return(
     <SafeAreaView style={styles.container}>
       <Image source={logo}
@@ -125,10 +140,10 @@ let PlansScreenWrapper = ({ props }) => {
       {
       trip.plans.packingPlans.map(plan => 
             <SafeAreaView style={styles.plan} key={plan.name}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => props.navigation.navigate('AddPackingList', { plan })}>
               <ImageBackground source={packing} style={styles.bgimg}>
 
-              <Text style={styles.text}>
+              <Text style={styles.textBold}>
                 {plan.name}
               </Text>
               </ImageBackground>
@@ -139,10 +154,12 @@ let PlansScreenWrapper = ({ props }) => {
       {
         trip.plans.homeCheckPlans.map(plan =>
           <SafeAreaView style={styles.plan}>
-            <TouchableOpacity>
-              <Text style={styles.text}>
-                
+            <TouchableOpacity onPress={() => props.navigation.navigate('AddHomeChecklist', { plan })}>
+            <ImageBackground source={home} style={styles.bgimg}>
+              <Text style={styles.textBold}>
+                Home Check List
               </Text>
+              </ImageBackground>
             </TouchableOpacity>
           </SafeAreaView>
         )
@@ -162,6 +179,11 @@ let PlansScreenWrapper = ({ props }) => {
         <TouchableOpacity style={styles.to} onPress={addNewPlan}>
           <Ionicons name="ios-add-circle-outline" size={40} color="maroon" />
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.to} onPress={saveTrip}>
+          <Ionicons name="ios-cloud-upload-outline" size={40} color="maroon" />
+        </TouchableOpacity>
+        
       </SafeAreaView>
     </SafeAreaView>
   )}
@@ -175,9 +197,10 @@ let PlansScreenWrapper = ({ props }) => {
     },
     plus: {
       flex: 1,
+      flexDirection: 'row',
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      alignItems: 'flex-end',
+      justifyContent: 'space-around',
     },
     textBold: {
       fontSize: 20,
@@ -196,7 +219,10 @@ let PlansScreenWrapper = ({ props }) => {
       justifyContent: 'flex-start',
     },
     to: {
-      paddingBottom: 10,
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      // paddingBottom: 10,
     },
     plan: {
       flex: 0.3,
@@ -229,7 +255,10 @@ let PlansScreenWrapper = ({ props }) => {
 
   let mapStateToProps = (state, props) => ({ state, props });
 
+  let mapDispatchToProps = dispatch => ({ 
+    updateTripToStore: (trip) => dispatch(updateTripToStore(trip))
+  });
       
-  let PlansScreen = connect(mapStateToProps)(PlansScreenWrapper);
+  let PlansScreen = connect(mapStateToProps, mapDispatchToProps)(PlansScreenWrapper);
 
 export default PlansScreen;

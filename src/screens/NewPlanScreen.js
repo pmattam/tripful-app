@@ -5,7 +5,8 @@ import ImagePicker from 'react-native-image-picker';
 import logo from '../assets/logo.png';
 
 let NewPlanScreenWrapper = ({ props }) => {
-  trip = props.navigation.state.params.trip;
+  // trip = props.navigation.state.params.trip;
+  plan = {};
 
   let handleSnapShot = () => {
     ImagePicker.showImagePicker({title: 'Select an Image'}, (response) => {
@@ -43,7 +44,7 @@ let NewPlanScreenWrapper = ({ props }) => {
     <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar')}>
       <Text>Car Rental</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList')}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList', { plan })}>
       <Text>Packing Items</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.to}>
@@ -52,7 +53,7 @@ let NewPlanScreenWrapper = ({ props }) => {
     <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
       <Text>Snapshot</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist')}>
+    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist', { plan })}>
       <Text>Home Checklist</Text>
     </TouchableOpacity>
 

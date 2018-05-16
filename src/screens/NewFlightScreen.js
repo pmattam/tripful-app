@@ -52,7 +52,6 @@ let NewFlightScreenWrapper = ({ props }) => {
     style={styles.logo}
     />
 
-
     <TextInput 
       style={styles.textfield} 
       placeholder='Airline'
@@ -152,10 +151,7 @@ const styles = StyleSheet.create({
 });
 
 let mapStateToProps = (state, props) => ({ state, props });
-
-let mapDispatchToProps = dispatch => ({ 
-});
       
-let NewFlightScreen = connect(mapStateToProps, mapDispatchToProps)(NewFlightScreenWrapper);
+let NewFlightScreen = connect(mapStateToProps)(NewFlightScreenWrapper);
 
 export default NewFlightScreen;
