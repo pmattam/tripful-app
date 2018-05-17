@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
-import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import packing from '../assets/packing.jpg';
 import flight from '../assets/flight.jpg';
@@ -10,7 +9,7 @@ import car from '../assets/car.jpg';
 import home from '../assets/home.jpg';
 import { addTrip } from '../lib/api-calls';
 import { updateTripToStore } from '../actions/actions';
-
+import logo from '../assets/logo_2.png';
 
 let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
   console.log("in plans", state);
@@ -177,11 +176,11 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       </SafeAreaView>
       <SafeAreaView style={styles.plus}>
         <TouchableOpacity style={styles.to} onPress={addNewPlan}>
-          <Ionicons name="ios-add-circle-outline" size={40} color="maroon" />
+          <Ionicons name="ios-add-circle-outline" size={40} color="#06005D" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.to} onPress={saveTrip}>
-          <Ionicons name="ios-cloud-upload-outline" size={40} color="maroon" />
+          <Ionicons name="ios-cloud-upload-outline" size={40} color="#06005D" />
         </TouchableOpacity>
         
       </SafeAreaView>
@@ -208,9 +207,8 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       color: 'white',
     },
     logo: {
-      width: 150,
-      height: 150,
-      borderRadius: 100,
+      width: 100,
+      height: 100
     },
     import: {
       flex: 0.2,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, StyleSheet, TextInput, Text, View, Image } from 'react-native';
+import { Button } from 'react-native-elements';
+import logo from '../assets/logo.png';
 import { loginUser } from '../lib/api-calls';
 import { addUserToStore } from '../actions/actions';
-import logo from '../assets/logo.png';
 
 let LoginScreenWrapper = ({ props, addUserToStore }) => {
 
@@ -38,45 +38,59 @@ let LoginScreenWrapper = ({ props, addUserToStore }) => {
 
   return(
     <View style={styles.container}>
-    <Image source={logo}
-    style={styles.logo}
-    />
+      <Image source={logo}
+      style={styles.logo}
+      />
 
-    <TextInput 
+      <TextInput 
+        style={styles.textfield} 
+        placeholder='Email'
+        onChangeText={handleEmailChange}
+        autoCorrect={false}
+        autoCapitalize={'none'}
+        keyboardType='email-address'
+      />
+
+      <TextInput 
       style={styles.textfield} 
-      placeholder='Email'
-      onChangeText={handleEmailChange}
+      placeholder='Password'
+      onChangeText={handlePasswordChange}
+      secureTextEntry={true}
       autoCorrect={false}
-      autoCapitalize={'none'}
-      keyboardType='email-address'
-    />
+      autoCapitalize={'none'} />
 
-    <TextInput 
-    style={styles.textfield} 
-    placeholder='Password'
-    onChangeText={handlePasswordChange}
-    secureTextEntry={true}
-    autoCorrect={false}
-    autoCapitalize={'none'} />
+      <Button
+        title='Sign In'
+        color='#06005D'
+        fontSize={15}
+        fontFamily={'HelveticaNeue-Light'}
+        buttonStyle={{
+          backgroundColor: '#fff',
+          borderColor: '#2EBCFF',
+          height: 48,
+          width: 100,
+          borderRadius: 5,
+          borderWidth: 1,
+        }}
+        onPress={() => handleUserLogin()}
+      />
 
-    <View style={styles.register}>
-      <Text style={styles.font}>New Member?</Text>
-        <Button 
-          title="Sign Up"
-          style={styles.button}
-          onPress={() => props.navigation.navigate('SignUp')}
-        />
-    </View>
-
-    <Button
-      style={styles.register}
-      title="Sign In"
-      color="maroon"
-      onPress={() => handleUserLogin()}
-    />
+      <View style={styles.register}>
+        <Text style={styles.font}>New Member?</Text>
+          <Button 
+            title="Sign Up"
+            color='#06005D'
+            fontSize={15}
+            fontFamily={'HelveticaNeue-Light'}
+            buttonStyle={{
+              backgroundColor: '#fff'
+            }}
+            onPress={() => props.navigation.navigate('SignUp')}
+          />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -86,10 +100,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
    textfield: {
-     height: 40, 
+     height: 48, 
      width: 300,
      margin: 10,
-     borderColor: 'maroon', 
+     borderColor: '#2EBCFF', 
      borderWidth: 1,
      borderRadius: 5,
      paddingLeft: 10
@@ -99,21 +113,31 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
    },
-   signin: {
-    height: 40,
-    width: 300,
-    borderColor: 'maroon',
-    borderWidth: 1,
-    borderRadius: 5
-   },
+  //  signin: {
+  //   height: 40,
+  //   width: 300,
+  //   borderColor: 'lightblue',
+  //   borderWidth: 1,
+  //   borderRadius: 5
+  //  },
    logo: {
-       width: 150,
-       height: 150,
-       borderRadius: 100,
+       width: 250,
+       height: 250
+      // borderRadius: 100,
    },
    font: {
-      fontSize: 15
+      fontSize: 15,
+      fontFamily: 'HelveticaNeue-Light',
+      color: '#2EBCFF'
    }
+  //  button: {
+  //    height: 40,
+  //    width: 100,
+  //    borderWidth: 1,
+  //    backgroundColor: 'lightblue',
+  //    borderColor: 'lightblue',
+  //    borderStyle: 'dotted'
+  //  }
 });
 
 let mapStateToProps = (state, props) => ({ state, props });

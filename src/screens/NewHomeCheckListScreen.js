@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Text, SafeAreaView, Button, Image, ImageBackground } from 'react-native';
+import { StyleSheet, TextInput, Text, SafeAreaView, Image, ImageBackground } from 'react-native';
+import { Button } from 'react-native-elements';
 import CheckBox from 'react-native-check-box';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_2.png';
 
 let NewHomeCheckListScreenWrapper = ({ props }) => {
   
@@ -46,6 +47,7 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkTurnOffGasItem}
+          checkBoxColor='#2EBCFF'
           isChecked={homeCheckList.gasChecked}
           leftText="Turn off the gas"
         />
@@ -55,6 +57,7 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkTurnOffRefrigeratorItem}
+          checkBoxColor='#2EBCFF'
           isChecked={homeCheckList.refrigeratorChecked}
           leftText="Turn off the refrigerator"
         />
@@ -64,6 +67,7 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkSecurityItem}
+          checkBoxColor='#2EBCFF'
           isChecked={homeCheckList.homeSecurityChecked}
           leftText="Home Security"
         />
@@ -73,6 +77,7 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkLockedDoorsItem}
+          checkBoxColor='#2EBCFF'
           isChecked={homeCheckList.lockedDoorsChecked}
           leftText="Locked Doors"
         />
@@ -108,7 +113,17 @@ let NewHomeCheckListScreenWrapper = ({ props }) => {
       <Button
         style={styles.button}
         title="Save"
-        color="maroon"
+        color='#06005D'
+        fontSize={15}
+        fontFamily={'HelveticaNeue-Light'}
+        buttonStyle={{
+          backgroundColor: '#fff',
+          borderColor: '#2EBCFF',
+          height: 48,
+          width: 100,
+          borderRadius: 5,
+          borderWidth: 1,
+        }}
         onPress={() => handleAddItems()}
       />
       </SafeAreaView>
@@ -142,13 +157,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
+        width: 100,
+        height: 100
     },
     font: {
-        fontSize: 15,
-        color: "maroon",
+      fontSize: 15,
+      fontFamily: 'HelveticaNeue-Light',
+      color: '#06005D'
     },
     checkbox: {
         width: 15,

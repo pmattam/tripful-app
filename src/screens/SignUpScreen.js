@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { StyleSheet, TextInput, Text, View, Image } from 'react-native';
+// import { createStackNavigator } from 'react-navigation';
 import logo from '../assets/logo.png';
 import { newUserSignUp } from '../lib/api-calls';
+import { Button } from 'react-native-elements';
 
 let SignUpScreenWrapper = ({ props }) => {
 
@@ -85,7 +86,17 @@ let SignUpScreenWrapper = ({ props }) => {
             <Button
                 style={styles.register}
                 title='Sign Up'
-                color='maroon'
+                color='#06005D'
+                fontSize={15}
+                fontFamily={'HelveticaNeue-Light'}
+                buttonStyle={{
+                backgroundColor: '#fff',
+                borderColor: '#2EBCFF',
+                height: 48,
+                width: 100,
+                borderRadius: 5,
+                borderWidth: 1,
+                }}
                 onPress={() => handleUserSignUp()}
             />
         </View>
@@ -100,10 +111,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     textfield: {
-        height: 40, 
+        height: 48, 
         width: 300,
         margin: 10,
-        borderColor: 'maroon', 
+        borderColor: '#2EBCFF', 
         borderWidth: 1,
         borderRadius: 5,
         paddingLeft: 10
@@ -114,13 +125,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
+        width: 250,
+        height: 250
+        // borderRadius: 100,
     },
-    font: {
-        fontSize: 15,
-    }
+    // font: {
+    //     fontSize: 15,
+    //     fontFamily: 'HelveticaNeue-Light',
+    //     color: '#2EBCFF'
+    // }
 });
 
 let mapStateToProps = (state, props) => ({ state, props });

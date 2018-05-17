@@ -7,8 +7,6 @@ let LoadingScreenWrapper = ({ props }) => {
 
     let navigateByToken = async() => {
         const userToken = await AsyncStorage.getItem('authorization');
-        // console.log(userToken);
-        // console.log("props", props);
         props.navigation.navigate(userToken ? 'App' : 'Auth');
     };
 
@@ -31,17 +29,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-    text: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
+    // text: {
+    //     fontSize: 20,
+    //     fontWeight: 'bold'
+    // },
     logo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
+        width: 250,
+        height: 250,
     },
     font: {
         fontSize: 15,
+        fontFamily: 'HelveticaNeue-Light',
+        color: '#06005D'
     }
 });
 

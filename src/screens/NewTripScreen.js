@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { 
-  Button,
   DatePickerIOS, 
   Image,
   SafeAreaView, 
@@ -10,8 +9,9 @@ import {
   TextInput,
   View 
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import { addTripToStore } from '../actions/actions';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_2.png';
 
 let NewTripScreenWrapper = ({ props, addTripToStore }) => {
 
@@ -123,7 +123,17 @@ let NewTripScreenWrapper = ({ props, addTripToStore }) => {
       <Button
         style={styles.button}
         title="Save"
-        color="maroon"
+        color='#06005D'
+        fontSize={15}
+        fontFamily={'HelveticaNeue-Light'}
+        buttonStyle={{
+          backgroundColor: '#fff',
+          borderColor: '#2EBCFF',
+          height: 48,
+          width: 100,
+          borderRadius: 5,
+          borderWidth: 1,
+        }}
         onPress={() => handleAddTrip()}
       />
     </SafeAreaView>
@@ -138,13 +148,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
    textfield: {
-     height: 40, 
-     width: 300,
-     margin: 10,
-     borderColor: 'maroon', 
-     borderWidth: 1,
-     borderRadius: 5,
-     paddingLeft: 10
+    height: 48, 
+    width: 300,
+    margin: 10,
+    borderColor: '#2EBCFF', 
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10
    },
    button: {
        flexDirection: 'row',
@@ -152,9 +162,8 @@ const styles = StyleSheet.create({
        justifyContent: 'center'
    },
    logo: {
-       width: 150,
-       height: 150,
-       borderRadius: 100,
+       width: 100,
+       height: 100
    },
    font: {
       fontSize: 15
