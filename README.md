@@ -1,5 +1,5 @@
 # Tripful
-
+---
 ## [Tripful Demo](https://youtu.be/myN7iyQw2uI)
 
 ## [Tripful Frontend Repo](https://github.com/pmattam/tripful-backend)
