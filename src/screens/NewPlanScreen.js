@@ -5,7 +5,12 @@ import ImagePicker from 'react-native-image-picker';
 import logo from '../assets/logo_2.png';
 
 let NewPlanScreenWrapper = ({ props }) => {
-  // trip = props.navigation.state.params.trip;
+  trip = props.navigation.state.params.trip;
+  address = {}
+  if (trip.plans.hotelPlans.length > 0) {
+    address = trip.plans.hotelPlans[0].address;
+  }
+  console.log("Address", address);
   plan = {};
 
   let handleSnapShot = () => {
@@ -22,9 +27,10 @@ let NewPlanScreenWrapper = ({ props }) => {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = { uri: response.uri };
-        console.log('src', source);
-        props.navigation.navigate('Plans', { source })
+        let sourceImg = { uri: response.uri };
+        let uri = response.uri;
+        console.log('src', sourceImg);
+        props.navigation.navigate('Plans', { sourceImg })
       }
     });
   }
@@ -47,7 +53,7 @@ let NewPlanScreenWrapper = ({ props }) => {
       <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList', { plan })}>
         <Text style={styles.font}>Packing Items</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.to}>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('Activity', { address })}>
         <Text style={styles.font}>Activity</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
@@ -87,7 +93,7 @@ const styles = StyleSheet.create({
        height: 100
    },
    font: {
-    fontSize: 15,
+    fontSize: 25,
     fontFamily: 'HelveticaNeue-Light',
     color: '#2EBCFF'
    },

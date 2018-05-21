@@ -76,9 +76,13 @@ const styles = StyleSheet.create({
        height: 100
    },
    text: {
-    //  flex:1,
     fontSize: 20,
-    color: 'maroon',
+    fontFamily: 'HelveticaNeue-Light',
+    color: '#06005D',
+    fontWeight: '500'
+    //  flex:1,
+    // fontSize: 20,
+    // color: 'maroon',
    },
    font: {
       fontSize: 15

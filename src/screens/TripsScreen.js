@@ -4,6 +4,9 @@ import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackgroun
 import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import trip1 from '../assets/trip1.jpg';
+import trip2 from '../assets/trip2.jpg';
+import trip3 from '../assets/trip3.jpg';
+import trip4 from '../assets/trip4.jpg';
 import { getAllTrips } from '../lib/api-calls';
 import { loadTripsToStore } from '../actions/actions';
 
@@ -18,9 +21,20 @@ class TripsScreenWrapper extends Component {
       });
   };
 
+  IMAGES = {
+    trip0: trip1,
+    trip1: trip3,
+    trip2: trip2,
+    trip3: trip4
+  };
+  getImage = (num) => { // dynamically invoked
+    return this.IMAGES['trip' + num];
+  };
+
   render() {
     let trips = this.props.trips;
-
+    console.log('Inside Trips', trips);
+   
     let addNewTrip = () => {
       console.log("Adding New Trip");
       this.props.navigation.navigate('AddTrip')
@@ -31,10 +45,10 @@ class TripsScreenWrapper extends Component {
           style={styles.logo}
         /> */}
       {
-        trips.map(trip => 
+        trips.map((trip, i) => 
             <SafeAreaView style={styles.trip} key={trip.name}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('Plans', { trip })}> 
-                <ImageBackground source={trip1}
+                <ImageBackground source={this.getImage(i)}
                   style={styles.snapshot}>
                   <Text style={styles.textBold}>
                     {trip.name}
@@ -69,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   trip: {
     flex: 0.3,
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 100, 
     width: 400,
-    borderColor: 'maroon'
+    borderColor: 'skyblue',
   },
   logo: {
     width: 150,
@@ -87,11 +101,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   textBold: {
+    fontFamily: 'HelveticaNeue-Light',
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
   },
   text: {
+    fontFamily: 'HelveticaNeue-Light',
     fontSize: 20,
     color: 'white',
   },

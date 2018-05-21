@@ -16,6 +16,7 @@ import NewHomeCheckListScreen from './src/screens/NewHomeCheckListScreen';
 import SnapShotPreviewScreen from './src/screens/SnapShotPreviewScreen';
 import FlightScreen from './src/screens/FlightScreen';
 import MapScreen from './src/screens/MapScreen';
+import ActivityMapScreen from './src/screens/ActivityMapScreen';
 import Logo from './Logo';
 
 const AuthStack = createStackNavigator({
@@ -118,6 +119,12 @@ const AppStack = createStackNavigator({
         screen: MapScreen,
         navigationOptions: {
             title: 'Map'
+        }
+    },
+    Activity: {
+        screen: ActivityMapScreen,
+        navigationOptions: {
+            title: 'Activity'
         }
     },
     Flight: {
