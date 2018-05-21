@@ -1,34 +1,36 @@
 {
-  "name": "tripful-app",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "jest": "^22.4.3",
-    "jest-react-native": "^18.0.0",
-    "react-test-renderer": "16.3.1"
-  },
-  "scripts": {
-    "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "react-native"
-  },
-  "dependencies": {
-    "@mapbox/polyline": "^1.0.0",
-    "react": "16.3.1",
-    "react-native": "~0.55.2",
-    "react-native-check-box": "^2.1.0",
-    "react-native-elements": "^0.19.1",
-    "react-native-image-picker": "^0.26.10",
-    "react-native-maps": "^0.21.0",
-    "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^2.0.1",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
-    "remote-redux-devtools": "^0.5.12"
-  }
+    "name": "tripful-app",
+    "version": "0.1.0",
+    "private": true,
+    "devDependencies": {
+        "babel-preset-react-native-stage-0": "^1.0.1",
+        "jest": "^22.4.3",
+        "jest-react-native": "^18.0.0",
+        "react-test-renderer": "16.3.1"
+    },
+    "scripts": {
+        "start": "react-native start",
+        "android": "react-native run-android",
+        "ios": "react-native run-ios",
+        "test": "jest",
+        "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/tripfulapp/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
+    },
+    "jest": {
+        "preset": "react-native"
+    },
+    "dependencies": {
+        "@mapbox/polyline": "^1.0.0",
+        "lodash": "^4.17.10",
+        "react": "16.3.1",
+        "react-native": "~0.55.2",
+        "react-native-check-box": "^2.1.0",
+        "react-native-elements": "^0.19.1",
+        "react-native-image-picker": "^0.26.10",
+        "react-native-maps": "^0.21.0",
+        "react-native-vector-icons": "^4.6.0",
+        "react-navigation": "^2.0.1",
+        "react-redux": "^5.0.7",
+        "redux": "^4.0.0",
+        "remote-redux-devtools": "^0.5.12"
+    }
 }

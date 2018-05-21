@@ -2,10 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, TextInput, Text, SafeAreaView, Button, Image, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_2.png';
 
 let NewPlanScreenWrapper = ({ props }) => {
-  // trip = props.navigation.state.params.trip;
+  trip = props.navigation.state.params.trip;
+  address = {}
+  if (trip.plans.hotelPlans.length > 0) {
+    address = trip.plans.hotelPlans[0].address;
+  }
+  console.log("Address", address);
   plan = {};
 
   let handleSnapShot = () => {
@@ -22,40 +27,41 @@ let NewPlanScreenWrapper = ({ props }) => {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = { uri: response.uri };
-        console.log('src', source);
-        props.navigation.navigate('Plans', { source })
+        let sourceImg = { uri: response.uri };
+        let uri = response.uri;
+        console.log('src', sourceImg);
+        props.navigation.navigate('Plans', { sourceImg })
       }
     });
   }
 
   return(
     <SafeAreaView style={styles.container}>
-    <Image source={logo}
-    style={styles.logo}
-    />
-    
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight')}>
-      <Text>Flight</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel')}>
-      <Text>Hotel</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar')}>
-      <Text>Car Rental</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList', { plan })}>
-      <Text>Packing Items</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to}>
-      <Text>Activity</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
-      <Text>Snapshot</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist', { plan })}>
-      <Text>Home Checklist</Text>
-    </TouchableOpacity>
+      <Image source={logo}
+      style={styles.logo}
+      />
+      
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddFlight')}>
+        <Text style={styles.font}>Flight</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHotel')}>
+        <Text style={styles.font}>Hotel</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddCar')}>
+        <Text style={styles.font}>Car Rental</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddPackingList', { plan })}>
+        <Text style={styles.font}>Packing Items</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('Activity', { address })}>
+        <Text style={styles.font}>Activity</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={handleSnapShot}>
+        <Text style={styles.font}>Snapshot</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.to} onPress={() => props.navigation.navigate('AddHomeChecklist', { plan })}>
+        <Text style={styles.font}>Home Checklist</Text>
+      </TouchableOpacity>
 
     </SafeAreaView>
   );
@@ -68,30 +74,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-   textfield: {
-     height: 40, 
-     width: 300,
-     margin: 10,
-     borderColor: 'maroon', 
-     borderWidth: 1,
-     borderRadius: 5,
-     paddingLeft: 10,
-   },
+  //  textfield: {
+  //    height: 40, 
+  //    width: 300,
+  //    margin: 10,
+  //    borderColor: 'maroon', 
+  //    borderWidth: 1,
+  //    borderRadius: 5,
+  //    paddingLeft: 10,
+  //  },
    button: {
        flexDirection: 'row',
        alignItems: 'center',
        justifyContent: 'center',
    },
    logo: {
-       width: 150,
-       height: 150,
-       borderRadius: 100,
+       width: 100,
+       height: 100
    },
    font: {
-      fontSize: 20,
+    fontSize: 25,
+    fontFamily: 'HelveticaNeue-Light',
+    color: '#2EBCFF'
    },
    to: {
-      height: 30
+      height: 50
    }
 });
 

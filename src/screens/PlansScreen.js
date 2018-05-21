@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
-import logo from '../assets/logo.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import packing from '../assets/packing.jpg';
 import flight from '../assets/flight.jpg';
@@ -10,11 +9,12 @@ import car from '../assets/car.jpg';
 import home from '../assets/home.jpg';
 import { addTrip } from '../lib/api-calls';
 import { updateTripToStore } from '../actions/actions';
-
+import logo from '../assets/logo_2.png';
 
 let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
   console.log("in plans", state);
   console.log("in plans", props.navigation.state.params);
+  let i=0;
   trip = props.navigation.state.params.trip;
   if (props.navigation.state.params.hotelPlan) {
     if (trip.plans.hotelPlans.indexOf(props.navigation.state.params.hotelPlan) == -1) {
@@ -31,9 +31,9 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       trip.plans.carPlans.push(props.navigation.state.params.carRental);
     }
   };
-  if (props.navigation.state.params.source) {
-    if (trip.plans.snapshots.indexOf(props.navigation.state.params.source) == -1) {
-      trip.plans.snapshots.push(props.navigation.state.params.source);
+  if (props.navigation.state.params.sourceImg) {
+    if (trip.plans.snapshots.indexOf(props.navigation.state.params.sourceImg) == -1) {
+      trip.plans.snapshots.push(props.navigation.state.params.sourceImg);
     }
   };
   if (props.navigation.state.params.packingList) {
@@ -74,7 +74,7 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
           <Text> Import Plans from Gmail </Text>
         </TouchableOpacity>
       </SafeAreaView> */}
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.cont}>
         { 
           trip.plans.flightPlans.map(flightPlan => 
             <SafeAreaView style={styles.plan} key={flightPlan.conf}>
@@ -124,7 +124,7 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
                 <Text style={styles.text}>
                 {plan.conf}
                 </Text>
-                <Text style={styles.text}>
+                {/* <Text style={styles.text}>
                 {plan.address}
                 </Text>
                 <Text style={styles.text}>
@@ -132,7 +132,7 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
                 </Text>
                 <Text style={styles.text}>
                 {plan.dropOffDate}
-                </Text>
+                </Text> */}
                 </ImageBackground>
               </TouchableOpacity>
             </SafeAreaView> 
@@ -153,7 +153,7 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       )} 
       {
         trip.plans.homeCheckPlans.map(plan =>
-          <SafeAreaView style={styles.plan}>
+          <SafeAreaView style={styles.plan} key={i++}>
             <TouchableOpacity onPress={() => props.navigation.navigate('AddHomeChecklist', { plan })}>
             <ImageBackground source={home} style={styles.bgimg}>
               <Text style={styles.textBold}>
@@ -165,8 +165,8 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
         )
       }
       {
-        trip.plans.snapshots.map(snapshot => 
-          <SafeAreaView style={styles.plan} key={snapshot.uri}>
+        trip.plans.snapshots.map((snapshot, i) => 
+          i > 0 && <SafeAreaView style={styles.plan} key={snapshot.uri}>
             <TouchableOpacity onPress={() => props.navigation.navigate('PreviewImage', { snapshot })}>
               <Image source={snapshot}
                 style={styles.bgimg}
@@ -177,11 +177,11 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       </SafeAreaView>
       <SafeAreaView style={styles.plus}>
         <TouchableOpacity style={styles.to} onPress={addNewPlan}>
-          <Ionicons name="ios-add-circle-outline" size={40} color="maroon" />
+          <Ionicons name="ios-add-circle-outline" size={40} color="#06005D" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.to} onPress={saveTrip}>
-          <Ionicons name="ios-cloud-upload-outline" size={40} color="maroon" />
+          <Ionicons name="ios-cloud-upload-outline" size={40} color="#06005D" />
         </TouchableOpacity>
         
       </SafeAreaView>
@@ -193,30 +193,40 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'flex-start',
+      justifyContent: 'space-around',
+    },
+    cont: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+    logo: {
+      width: 100,
+      height: 75
+    },
+    bgimg: {
+       //flex: 1,
+       alignItems: 'center',
+       justifyContent: 'center',
+      width: 500,
+      height: 75,
+      // paddingRight: 5,
+      // borderColor: 'maroon', 
+    },
+    textBold: {
+      fontFamily: 'HelveticaNeue-Light',
+      //color: '#2EBCFF',
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: 'white',
     },
     plus: {
-      flex: 1,
+      flex: 0.1,
       flexDirection: 'row',
       backgroundColor: '#fff',
       alignItems: 'flex-end',
       justifyContent: 'space-around',
-    },
-    textBold: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: 'white',
-    },
-    logo: {
-      width: 150,
-      height: 150,
-      borderRadius: 100,
-    },
-    import: {
-      flex: 0.2,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
     },
     to: {
       flex: 1,
@@ -224,33 +234,7 @@ let PlansScreenWrapper = ({ state, props, updateTripToStore }) => {
       justifyContent: 'center',
       // paddingBottom: 10,
     },
-    plan: {
-      flex: 0.3,
-      flexDirection: 'row',
-      backgroundColor: '#fff',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      height: 50, 
-      width: 400,
-      margin: 1,
-      borderColor: 'maroon', 
-      // borderWidth: 1,
-      // borderRadius: 5,
-    },
-    snapshot: {
-      width: 50,
-      height: 50,
-      paddingRight: 5
-    },
-    bgimg: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 500,
-      height: 50,
-      paddingRight: 5,
-      borderColor: 'maroon', 
-    }
+
   });
 
   let mapStateToProps = (state, props) => ({ state, props });

@@ -1,6 +1,7 @@
 console.disableYellowBox = true;
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import MainTabNavigator from './MainTabNavigator';
 import LoadingScreen from './src/screens/LoadingScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
@@ -14,9 +15,9 @@ import NewPackingListScreen from './src/screens/NewPackingListScreen';
 import NewHomeCheckListScreen from './src/screens/NewHomeCheckListScreen';
 import SnapShotPreviewScreen from './src/screens/SnapShotPreviewScreen';
 import FlightScreen from './src/screens/FlightScreen';
-import MainTabNavigator from './MainTabNavigator';
-
 import MapScreen from './src/screens/MapScreen';
+import ActivityMapScreen from './src/screens/ActivityMapScreen';
+import Logo from './Logo';
 
 const AuthStack = createStackNavigator({
     Login: {
@@ -28,19 +29,30 @@ const AuthStack = createStackNavigator({
     SignUp: {
         screen: SignUpScreen,
         navigationOptions: {
-            title: 'SignUp'
+            title: 'Sign Up'
         }
     }
 }, {
-    initialRouteName: 'Login'
+    initialRouteName: 'Login',
+    navigationOptions: {
+        // headerStyle: {
+        //     backgroundColor: '#fff'  
+        // },
+        headerTitleStyle: {
+            // fontFamily: 'HelveticaNeue-Light',
+            color: '#06005D',
+            fontSize: 15,
+            fontWeight: '400'
+        }
+    }
 });
 
 const AppStack = createStackNavigator({
     MainTabNavigator: {
         screen: MainTabNavigator,
-        // navigationOptions: {
-        //     title: 'Tripful'
-        // }
+        navigationOptions: {
+            headerTitle: < Logo / >
+        }
     },
     AddTrip: {
         screen: NewTripScreen,
@@ -51,13 +63,20 @@ const AppStack = createStackNavigator({
     Plans: {
         screen: PlansScreen,
         navigationOptions: {
-            title: 'Plans'
+            title: 'Plans',
+            // headerTitle: <PlansLogo />
+            // headerTitleStyle: {
+            //     color: '#06005D',
+            //     fontSize: 15,
+            //     fontWeight: '400'
+            // }
         }
     },
     AddPlan: {
         screen: NewPlanScreen,
         navigationOptions: {
             title: 'AddPlan'
+                // headerTitle: <AddPlanLogo />
         }
     },
     AddFlight: {
@@ -102,6 +121,12 @@ const AppStack = createStackNavigator({
             title: 'Map'
         }
     },
+    Activity: {
+        screen: ActivityMapScreen,
+        navigationOptions: {
+            title: 'Activity'
+        }
+    },
     Flight: {
         screen: FlightScreen,
         navigationOptions: {
@@ -109,7 +134,17 @@ const AppStack = createStackNavigator({
         }
     },
 }, {
-    initialRouteName: 'MainTabNavigator'
+    initialRouteName: 'MainTabNavigator',
+    navigationOptions: {
+        headerStyle: {
+            backgroundColor: '#fff'
+        },
+        headerTitleStyle: {
+            color: '#06005D',
+            fontSize: 15,
+            fontWeight: '400'
+        }
+    }
 });
 
 let Routes = createSwitchNavigator({

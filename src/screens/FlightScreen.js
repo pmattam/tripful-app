@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_2.png';
 import flight from '../assets/flight.jpg';
 
 let FlightScreenWrapper = ({ props }) => {
@@ -72,14 +72,17 @@ const styles = StyleSheet.create({
     // borderRadius: 5,
   },
    logo: {
-       width: 150,
-       height: 150,
-       borderRadius: 100,
+       width: 100,
+       height: 100
    },
    text: {
-    //  flex:1,
     fontSize: 20,
-    color: 'maroon',
+    fontFamily: 'HelveticaNeue-Light',
+    color: '#06005D',
+    fontWeight: '500'
+    //  flex:1,
+    // fontSize: 20,
+    // color: 'maroon',
    },
    font: {
       fontSize: 15

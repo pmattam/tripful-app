@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TextInput, Text, SafeAreaView, Button, Image, ImageBackground } from 'react-native';
+import { StyleSheet, TextInput, Text, SafeAreaView, Image, ImageBackground } from 'react-native';
+import { Button } from 'react-native-elements';
 import CheckBox from 'react-native-check-box';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_2.png';
 // import packing from '../assets/packing.jpg';
 
 let NewPackingListScreenWrapper = ({ props }) => {
@@ -61,6 +62,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkShirtsItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.shirtsChecked}
           leftText="Shirts"
         />
@@ -70,6 +72,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkPantsItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.pantsChecked}
           leftText="Pants"
         />
@@ -79,6 +82,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkTltItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.tltChecked}
           leftText="Toiletries"
         />
@@ -88,6 +92,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkCosmeticsItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.cosmeticsChecked}
           leftText="Cosmetics"
         />
@@ -97,6 +102,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkShoesItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.shoesChecked}
           leftText="Shoes"
         />
@@ -106,6 +112,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkMedsItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.medsChecked}
           leftText="Medicines"
         />
@@ -115,6 +122,7 @@ let NewPackingListScreenWrapper = ({ props }) => {
         <CheckBox
           style={styles.checkbox}
           onClick={checkCameraItem}
+          checkBoxColor='#2EBCFF'
           isChecked={packingList.cameraChecked}
           leftText="Camera"
         />
@@ -123,7 +131,17 @@ let NewPackingListScreenWrapper = ({ props }) => {
       <Button
         style={styles.button}
         title="Save"
-        color="maroon"
+        color='#06005D'
+        fontSize={15}
+        fontFamily={'HelveticaNeue-Light'}
+        buttonStyle={{
+          backgroundColor: '#fff',
+          borderColor: '#2EBCFF',
+          height: 48,
+          width: 100,
+          borderRadius: 5,
+          borderWidth: 1,
+        }}
         onPress={() => handleAddItems()}
       />
       </SafeAreaView>
@@ -160,18 +178,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
+        width: 100,
+        height: 100
     },
     font: {
-        fontSize: 15,
-        color: "maroon",
+      fontSize: 15,
+      fontFamily: 'HelveticaNeue-Light',
+      color: '#06005D'
     },
     checkbox: {
       width: 15,
       height: 15,
-      paddingRight: 10,
+      paddingRight: 10
     }
 });
 
