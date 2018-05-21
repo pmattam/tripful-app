@@ -1,6 +1,6 @@
 # Tripful
 ---
-## [Tripful Demo] (https://youtu.be/myN7iyQw2uI)
+## [Tripful Demo](https://youtu.be/myN7iyQw2uI)
 
 ## Overview
 Tripful is a React Native App to organize all the travel plans in one place. It allows users to save their Flight, Hotel, Car Rental reservations. Also it allows user to have a packing and home checklist and also able to link their snapshots of documents or parking lot information etc.
